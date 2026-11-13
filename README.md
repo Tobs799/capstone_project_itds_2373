@@ -108,6 +108,14 @@ Additional features were developed to support subsequent analysis:
 | [Cleaning Report](reports/anime_cleaning_report.docx) | Data-quality assessment and documentation of cleaning decisions |
 | [Final Merged Dataset](data/processed/final_anime_dataset.csv) | Cleaned, integrated dataset prepared for further analysis |
 
+## Data Access
+
+Due to the large size of some CSV files and GitHub's file preview limitations, the cleaned datasets are also available through Google Drive.
+
+**[Access Cleaned CSV Files on Google Drive](https://drive.google.com/drive/folders/1ChEe84csJKMN5PtDWmRVp3y8IPAEOm1y?usp=drive_link)**
+
+These datasets were prepared during the Data Engineering & Acquisition phase and will support the subsequent exploratory analysis, clustering, and predictive modeling stages of the capstone project.
+
 ### Tools and Technologies
 
 Python, pandas, NumPy, Jupyter Notebook, Git, and GitHub.
