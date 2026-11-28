@@ -1,0 +1,19 @@
+# Raw and intermediate datasets
+animes.csv
+profiles.csv
+reviews.csv
+anime_clean.csv
+profiles_clean.csv
+reviews_clean.csv
+
+# Notebook checkpoints and Python cache
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Temporary Word files
+~$*.docx

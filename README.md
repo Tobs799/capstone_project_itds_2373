@@ -1,169 +1,172 @@
-# capstone_project_itds_2373
-# Data Mining Capstone Project
-## Anime Acquisition Strategy for a Streaming Platform
+# Anime Acquisition Strategy | Data Engineering
 
-**Course:** ITDS 2373 — Data Mining
+## Project Overview
 
-**Project Status:** Data Engineering & Acquisition phase completed; remaining team analyses pending.
+This project was developed as part of the Data Mining Methods (ITDS 2373) capstone at Houston Community College. The overall objective is to help a streaming platform identify 10 anime titles with strong licensing potential based on audience engagement, viewer sentiment, popularity and franchise potential.
 
-## Business Scenario
+My individual contribution focuses on transforming raw, inconsistent data into a reliable, analysis-ready dataset that supports the team's analytical models and acquisition decisions.
 
-A new streaming platform has hired a Data Mining Consulting Team to identify 10 anime titles for licensing from the MyAnimeList database.
+## My Role
 
-The Chief Content Officer (CCO) has allocated a significant acquisition budget. However, the company is looking beyond popular anime titles. It wants investments that can attract large audiences, generate positive viewer engagement, and potentially develop into long-term franchises through sequels, spin-offs, merchandise, movies, and other intellectual property opportunities.
+**Tobechukwu Ibukun — Data Engineering & Acquisition Analyst**
 
-### Business Question
+My primary responsibility was to answer the question:
 
-> If you were responsible for investing millions of dollars in anime licensing and future franchise ownership opportunities, which 10 anime would you recommend and why?
+> What data should the team trust and use for decision-making?
 
-The team's recommendations must be supported by data cleaning, exploratory analysis, clustering, predictive modeling, review analysis, and business interpretation.
+My work included data cleaning, text preprocessing, feature engineering, dataset integration, data quality validation and technical documentation.
 
-## Dataset
+## Tools and Technologies
 
-**Source:** [Anime Dataset with Reviews — MyAnimeList (Kaggle)](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews)
+Python, Pandas, NumPy, Scikit-learn, NLTK, Regular Expressions (Regex), Jupyter Notebook and python-docx.
 
-The project uses three datasets:
+## Data Source
 
-- **Anime:** Anime titles, genres, ratings, popularity, membership, and release information.
-- **Profiles:** User profiles and favorite anime selections.
-- **Reviews:** Anime reviews and associated ratings.
+The project uses the [MyAnimeList Dataset — Animes, Profiles and Reviews](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews) from Kaggle.
 
-## Team Roles and Responsibilities
+| Dataset | Original Records | Description |
+|---|---:|---|
+| animes.csv | 19,311 | Anime titles, genres, ratings and popularity |
+| profiles.csv | 81,727 | User profiles and favorite anime |
+| reviews.csv | 192,112 | User reviews and rating components |
 
-The capstone is divided into four analytical roles.
+## Dataset Access
 
-### 1. Data Engineering & Acquisition Analyst
+Due to GitHub's file size limitations, the raw and processed datasets can be accessed through Google Drive.
 
-**Key Question:** What data should the team trust and use for decision-making?
+- [Original dataset — Kaggle](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews)
+- [Download datasets — Google Drive](https://drive.google.com/drive/folders/1SeWjj1deW8uadpfGufheQvh1ixnctNiM?usp=sharing)
+- [Final integrated dataset](final_anime_dataset.csv)
 
-Responsibilities include exploring the datasets, documenting their structure, addressing data-quality issues, engineering relevant features, and integrating the data for further analysis.
+## Data Engineering Workflow
 
-**Deliverables:** Data dictionary, cleaning report, and final merged dataset.
+### 1. Data Cleaning
 
-### 2. Market Intelligence & Visualization Analyst
+- Removed exact duplicates and repeated identifiers.
+- Assessed missing values and inconsistent formats.
+- Converted columns to appropriate data types and handled invalid ratings.
+- Parsed structured information stored as text.
+- Preserved missing ratings where imputation could introduce bias.
 
-**Key Question:** What characteristics appear to make anime successful?
+### 2. Text Preprocessing
 
-This role focuses on exploratory analysis of ratings, popularity, genres, episode counts, review sentiment, and audience engagement.
+Prepared reviews for downstream sentiment analysis by removing HTML tags, URLs, unnecessary headers, punctuation, numbers and stopwords. Negation words such as *no*, *not*, *nor* and *never* were preserved to maintain sentiment context.
 
-**Deliverables:** Visual dashboard and business insights document.
+### 3. Feature Engineering
 
-### 3. Consumer Segmentation & Clustering Analyst
-
-**Key Question:** Which anime belong in the same investment category?
-
-This role applies clustering techniques to identify groups such as mainstream hits, hidden gems, highly rated niche titles, and potential franchise opportunities.
-
-**Deliverables:** Cluster visualizations, interpretations, and strategic recommendations.
-
-### 4. Predictive Analytics & Acquisition Strategist
-
-**Key Question:** Which anime have the highest probability of becoming long-term successes?
-
-This role uses predictive models to evaluate anime performance, identify important success factors, and develop a strategic ranking system.
-
-**Deliverables:** Predictive models, feature importance analysis, and strategic rankings.
-
----
-
-## My Contribution: Data Engineering & Acquisition
-
-This repository currently documents my work as the Data Engineering & Acquisition Analyst.
-
-### Dataset Exploration and Preparation
-
-The work completed includes:
-
-- Examining the anime, profiles, and reviews datasets.
-- Identifying relationships between anime records, reviews, and user favorites.
-- Identifying and removing duplicate records and identifiers.
-- Assessing missing values and data completeness.
-- Standardizing data types and correcting inconsistencies.
-- Parsing genre information and user favorite lists.
-- Aggregating review scores and favorite counts.
-- Merging the datasets and validating the final output.
-
-### Feature Engineering
-
-Additional features were developed to support subsequent analysis:
-
-| Feature | Purpose |
+| Feature Group | Business Purpose |
 |---|---|
-| `genre_count` | Number of genres associated with each anime |
-| `popularity_index` | Normalized measure of relative popularity |
-| `franchise_indicator` | Identifies potentially related anime titles using a heuristic |
-| `review_count` | Number of reviews per anime |
-| `avg_review_score` | Average review score |
-| `favorites_count` | Number of distinct profiles favoriting an anime |
-| `release_year` | Year the anime was released |
-| `anime_age` | Age of the anime based on its release year |
-| `release_decade` | Decade in which the anime was released |
+| Popularity Index | Standardizes popularity for comparison |
+| Genre Indicators | Supports analysis across 43 genres |
+| Franchise Indicator | Identifies potential franchise-related titles |
+| Favorites Count | Measures audience interest |
+| Review Metrics | Captures review volume and average ratings |
+| Review Component Ratings | Evaluates specific aspects of viewer satisfaction |
+| Release Features | Supports historical and release-period analysis |
+| Content Suitability | Supports responsible licensing decisions |
 
-### Completed Deliverables
+### 4. Content Suitability Classification
+
+Developed three genre-based features: `adult_content_flag`, `suggestive_content_flag` and `content_category`. These distinguish adult content, suggestive content, titles with no adult genre identified and unknown content categories.
+
+All titles were retained to allow the acquisition team to apply appropriate filters. These indicators are based on genre labels and do not represent official age ratings.
+
+### 5. Dataset Integration
+
+Integrated the cleaned anime dataset with aggregated review metrics and user favorites using left joins and one-to-one merge validation. This preserved one record per unique anime ID, including titles without reviews.
+
+### 6. Data Quality Validation
+
+Performed checks for completeness, uniqueness, validity and feature consistency.
+
+## Results
+
+### Data Cleaning Summary
+
+| Dataset | Before Cleaning | After Cleaning | Records Removed |
+|---|---:|---:|---:|
+| Anime | 19,311 | 16,216 | 3,095 |
+| Profiles | 81,727 | 47,885 | 33,842 |
+| Reviews | 192,112 | 130,519 | 61,593 |
+| **Total** | **293,150** | **194,620** | **98,530** |
+
+Approximately 33.6% of the original records were removed during duplicate cleaning.
+
+### Final Dataset Quality
+
+| Metric | Result |
+|---|---:|
+| Unique Anime Records | 16,216 |
+| Total Columns | 79 |
+| Overall Data Completeness | 95.14% |
+| Duplicate Anime IDs | 0 |
+| Missing Anime IDs | 0 |
+| Detected Invalid Values | 0 |
+| Detected Consistency Issues | 0 |
+| Cleaned Reviews | 130,519 |
+| Anime Titles with Reviews | 8,113 |
+| Matched User Favorites | 216,297 |
+
+## Project Deliverables
 
 | Deliverable | Description |
 |---|---|
-| [Jupyter Notebook](notebooks/Capstone_Project_ITDS_2373.ipynb) | Python workflow for dataset exploration, cleaning, feature engineering, and integration |
-| [Data Dictionary](reports/anime_data_dictionary.docx) | Definitions, data types, and documentation of dataset attributes |
-| [Cleaning Report](reports/anime_cleaning_report.docx) | Data-quality assessment and documentation of cleaning decisions |
-| [Final Merged Dataset](data/processed/final_anime_dataset.csv) | Cleaned, integrated dataset prepared for further analysis |
+| [Data Engineering Notebook](Capstone_project_itds_2373_final_submission.ipynb) | Complete preprocessing, feature engineering and validation workflow |
+| [Final Anime Dataset](final_anime_dataset.csv) | Analysis-ready dataset containing 79 columns |
+| [Data Dictionary](Anime_Data_Dictionary.docx) | Column definitions, data types and missing-value information |
+| [Data Engineering Report](Anime_Data_Engineering_Report.docx) | Cleaning methodology, engineering decisions and data reliability |
+| [Documentation Generator Notebook](Data_Dictionary_and_Data_Engineering_Report.ipynb) | Reproducible Python workflow for generating Word documentation |
 
-## Data Access
+## Repository Structure
 
-Due to the large size of some CSV files and GitHub's file preview limitations, the cleaned datasets are also available through Google Drive.
+```text
+anime-acquisition-data-engineering/
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── Capstone_project_itds_2373_final_submission.ipynb
+├── Data_Dictionary_and_Data_Engineering_Report.ipynb
+├── Anime_Data_Dictionary.docx
+├── Anime_Data_Engineering_Report.docx
+└── final_anime_dataset.csv
+```
 
-**[Access Cleaned CSV Files on Google Drive](https://drive.google.com/drive/folders/1ChEe84csJKMN5PtDWmRVp3y8IPAEOm1y?usp=drive_link)**
+## How to Run the Project
 
-These datasets were prepared during the Data Engineering & Acquisition phase and will support the subsequent exploratory analysis, clustering, and predictive modeling stages of the capstone project.
+1. Clone or download this repository.
+2. Download the original datasets from [Kaggle](https://www.kaggle.com/datasets/marlesson/myanimelist-dataset-animes-profiles-reviews) or [Google Drive](https://drive.google.com/drive/folders/1SeWjj1deW8uadpfGufheQvh1ixnctNiM?usp=sharing).
+3. Place `animes.csv`, `profiles.csv` and `reviews.csv` in the project directory.
+4. Install the required Python libraries:
 
-### Tools and Technologies
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Python, pandas, NumPy, Jupyter Notebook, Git, and GitHub.
+5. Open `Capstone_project_itds_2373_final_submission.ipynb` in Jupyter Notebook.
+6. Confirm the input and output paths match your local folder structure.
+7. Restart the kernel and run all cells.
+8. Open `Data_Dictionary_and_Data_Engineering_Report.ipynb`, confirm the dataset and documentation paths, and run all cells to regenerate the Word documents.
 
-### Outcome
+The processed datasets are available through Google Drive for users who wish to proceed directly to analysis.
 
-This phase produced a consolidated dataset combining anime attributes with aggregated review and user-favorite information.
+## Data Limitations
 
-The dataset, data dictionary, and cleaning report establish a documented foundation for the remaining data mining activities.
+- The dataset represents historical MyAnimeList activity and may not reflect current audience preferences.
+- Review coverage varies across anime titles.
+- Favorites counts reflect engagement within the available profile dataset.
+- Franchise indicators are based on title patterns rather than verified franchise relationships.
+- Content suitability classifications depend on available genre labels.
+- Missing ratings were retained to avoid introducing artificial audience opinions.
 
----
+## Business Impact
 
-## Final Team Task: Anime Acquisition Strategy
+The final dataset provides a foundation for audience demand assessment, genre preference analysis, viewer sentiment analysis, franchise potential assessment, content suitability screening and data-driven licensing recommendations.
 
-After completing all four analytical phases, the team will present its findings to the streaming platform's executive leadership.
+This project demonstrates my ability to transform multiple raw datasets into a structured, validated and documented analytical resource that supports business decision-making.
 
-### Top 10 Anime to Acquire
+## Author
 
-Each recommendation will include:
-
-- Anime title
-- Rating and popularity
-- Review sentiment
-- Cluster membership
-- Predictive model results
-- Business justification and franchise potential
-
-### Final Presentation
-
-The presentation will address:
-
-1. What characteristics define successful anime?
-2. What patterns emerged from the data?
-3. What clusters were identified?
-4. What factors best predicted success?
-5. Which 10 anime should be acquired?
-6. Which 3 anime should receive priority investment for future franchise ownership?
-
-### Executive Deliverable
-
-The completed project will include a one-page **Investment Recommendation Memo** outlining the 10 recommended anime, three priority franchise investments, expected benefits, potential risks, and supporting data-driven evidence.
-
-**Success Criterion:** Recommendations must be based on data mining results and business reasoning rather than personal preferences or fandom.
-
----
-
-
-| Predictive Analytics & Acquisition Strategy | Pending |
-| Final Team Presentation & Investment Memo | Pending |
-
-*This repository currently focuses on the Data Engineering & Acquisition phase. Additional findings and deliverables will be incorporated as the team progresses through the capstone.*
+**Tobechukwu Ibukun**  
+Data Engineering & Acquisition Analyst  
+Data Mining Methods (ITDS 2373)  
+Houston Community College | Fall 2026
