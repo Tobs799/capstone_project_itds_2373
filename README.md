@@ -163,10 +163,3 @@ The processed datasets are available through Google Drive for users who wish to 
 The final dataset provides a foundation for audience demand assessment, genre preference analysis, viewer sentiment analysis, franchise potential assessment, content suitability screening and data-driven licensing recommendations.
 
 This project demonstrates my ability to transform multiple raw datasets into a structured, validated and documented analytical resource that supports business decision-making.
-
-## Author
-
-**Tobechukwu Ibukun**  
-Data Engineering & Acquisition Analyst  
-Data Mining Methods (ITDS 2373)  
-Houston Community College | Fall 2026
